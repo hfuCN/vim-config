@@ -21,16 +21,16 @@ let g:deoplete#sources#jedi#statement_length = 30
 let g:deoplete#sources#jedi#show_docstring = 1
 let g:deoplete#sources#jedi#short_types = 1
 
-let g:deoplete#sources#ternjs#filetypes = [
-	\ 'jsx',
-	\ 'javascript.jsx',
-	\ 'vue',
-	\ 'javascript'
-	\ ]
+" let g:deoplete#sources#ternjs#filetypes = [
+"	\ 'jsx',
+"	\ 'javascript.jsx',
+"	\ 'vue',
+"	\ 'javascript'
+"	\ ]
 
-let g:deoplete#sources#ternjs#timeout = 3
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#docs = 1
+" let g:deoplete#sources#ternjs#timeout = 3
+" let g:deoplete#sources#ternjs#types = 1
+" let g:deoplete#sources#ternjs#docs = 1
 
 call deoplete#custom#source('_', 'min_pattern_length', 2)
 
@@ -39,7 +39,7 @@ call deoplete#custom#source('_', 'min_pattern_length', 2)
 " ---
 
 let g:deoplete#sources = get(g:, 'deoplete#sources', {})
-let g:deoplete#sources.go = ['vim-go']
+" let g:deoplete#sources.go = ['vim-go']
 " let g:deoplete#sources.javascript = ['file', 'ternjs']
 " let g:deoplete#sources.jsx = ['file', 'ternjs']
 
@@ -57,27 +57,27 @@ let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 " let g:deoplete#keyword_patterns._ = '[a-zA-Z_]\k*\(?'
 
 let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
-let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
-let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
+" let g:deoplete#omni#functions.css = 'csscomplete#CompleteCSS'
+" let g:deoplete#omni#functions.html = 'htmlcomplete#CompleteTags'
 let g:deoplete#omni#functions.markdown = 'htmlcomplete#CompleteTags'
 " let g:deoplete#omni#functions.javascript =
 "	\ [ 'tern#Complete', 'jspc#omni', 'javascriptcomplete#CompleteJS' ]
 
 let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
-let g:deoplete#omni_patterns.html = '<[^>]*'
+" let g:deoplete#omni_patterns.html = '<[^>]*'
 " let g:deoplete#omni_patterns.javascript = '[^. *\t]\.\w*'
 " let g:deoplete#omni_patterns.javascript = '[^. \t]\.\%\(\h\w*\)\?'
-let g:deoplete#omni_patterns.php =
-	\ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+" let g:deoplete#omni_patterns.php =
+"	\ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 
 let g:deoplete#omni#input_patterns = get(g:, 'deoplete#omni#input_patterns', {})
 let g:deoplete#omni#input_patterns.xml = '<[^>]*'
 let g:deoplete#omni#input_patterns.md = '<[^>]*'
-let g:deoplete#omni#input_patterns.css  = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni#input_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni#input_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
-let g:deoplete#omni#input_patterns.python = ''
-let g:deoplete#omni#input_patterns.javascript = ''
+" let g:deoplete#omni#input_patterns.css  = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni#input_patterns.scss = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni#input_patterns.sass = '^\s\+\w\+\|\w\+[):;]\?\s\+\w*\|[@!]'
+" let g:deoplete#omni#input_patterns.python = ''
+" let g:deoplete#omni#input_patterns.javascript = ''
 
 " }}}
 " Ranking and Marks " {{{
@@ -85,8 +85,8 @@ let g:deoplete#omni#input_patterns.javascript = ''
 call deoplete#custom#source('omni',          'mark', '⌾')
 call deoplete#custom#source('flow',          'mark', '⌁')
 call deoplete#custom#source('padawan',       'mark', '⌁')
-call deoplete#custom#source('TernJS',        'mark', '⌁')
-call deoplete#custom#source('go',            'mark', '⌁')
+" call deoplete#custom#source('TernJS',        'mark', '⌁')
+c" all deoplete#custom#source('go',            'mark', '⌁')
 call deoplete#custom#source('jedi',          'mark', '⌁')
 call deoplete#custom#source('vim',           'mark', '⌁')
 call deoplete#custom#source('neosnippet',    'mark', '⌘')
@@ -98,10 +98,10 @@ call deoplete#custom#source('syntax',        'mark', '♯')
 call deoplete#custom#source('member',        'mark', '.')
 
 call deoplete#custom#source('padawan',       'rank', 660)
-call deoplete#custom#source('go',            'rank', 650)
+" call deoplete#custom#source('go',            'rank', 650)
 call deoplete#custom#source('vim',           'rank', 640)
 call deoplete#custom#source('flow',          'rank', 630)
-call deoplete#custom#source('TernJS',        'rank', 620)
+" call deoplete#custom#source('TernJS',        'rank', 620)
 call deoplete#custom#source('jedi',          'rank', 610)
 call deoplete#custom#source('omni',          'rank', 600)
 call deoplete#custom#source('neosnippet',    'rank', 510)
