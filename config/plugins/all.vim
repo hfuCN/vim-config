@@ -2,57 +2,6 @@
 " Plugin Settings
 "---------------------------------------------------------
 
-if dein#tap('denite.nvim')
-	nnoremap <silent><LocalLeader>r :<C-u>Denite -resume -refresh<CR>
-	nnoremap <silent><LocalLeader>f :<C-u>Denite file_rec<CR>
-	nnoremap <silent><LocalLeader>b :<C-u>Denite buffer file_old -default-action=switch<CR>
-	nnoremap <silent><LocalLeader>d :<C-u>Denite directory_rec -default-action=cd<CR>
-	nnoremap <silent><LocalLeader>v :<C-u>Denite register -buffer-name=register<CR>
-	xnoremap <silent><LocalLeader>v :<C-u>Denite register -buffer-name=register -default-action=replace<CR>
-	nnoremap <silent><LocalLeader>l :<C-u>Denite location_list -buffer-name=list<CR>
-	nnoremap <silent><LocalLeader>q :<C-u>Denite quickfix -buffer-name=list<CR>
-	nnoremap <silent><LocalLeader>n :<C-u>Denite dein<CR>
-	nnoremap <silent><LocalLeader>g :<C-u>Denite grep<CR>
-	nnoremap <silent><LocalLeader>j :<C-u>Denite jump change file_point<CR>
-	nnoremap <silent><LocalLeader>o :<C-u>Denite outline<CR>
-	nnoremap <silent><LocalLeader>s :<C-u>Denite session -buffer-name=list<CR>
-	nnoremap <silent><expr> <LocalLeader>t &filetype == 'help' ? "g\<C-]>" :
-		\ ":\<C-u>DeniteCursorWord -buffer-name=tag
-		\  tag:include\<CR>"
-	nnoremap <silent><expr> <LocalLeader>p  &filetype == 'help' ?
-		\ ":\<C-u>pop\<CR>" : ":\<C-u>Denite -mode=normal jump\<CR>"
-	nnoremap <silent><LocalLeader>h :<C-u>Denite help<CR>
-	nnoremap <silent><LocalLeader>m :<C-u>Denite mpc -buffer-name=mpc<CR>
-	nnoremap <silent><LocalLeader>/ :<C-u>Denite line<CR>
-	nnoremap <silent><LocalLeader>* :<C-u>DeniteCursorWord line<CR>
-	nnoremap <silent><LocalLeader>z :<C-u>Denite z<CR>
-	nnoremap <silent><LocalLeader>; :<C-u>Denite command command_history<CR>
-
-	" chemzqm/denite-git
-	nnoremap <silent> <Leader>gl :<C-u>Denite gitlog:all<CR>
-	nnoremap <silent> <Leader>gs :<C-u>Denite gitstatus<CR>
-	nnoremap <silent> <Leader>gc :<C-u>Denite gitbranch<CR>
-
-	" Open Denite with word under cursor or selection
-	nnoremap <silent> <Leader>gf :DeniteCursorWord file_rec<CR>
-	nnoremap <silent> <Leader>gg :DeniteCursorWord grep<CR>
-	vnoremap <silent> <Leader>gg
-		\ :<C-u>call <SID>get_selection('/')<CR>
-		\ :execute 'Denite grep:::'.@/<CR><CR>
-
-	function! s:get_selection(cmdtype)
-		let temp = @s
-		normal! gv"sy
-		let @/ = substitute(escape(@s, '\'.a:cmdtype), '\n', '\\n', 'g')
-		let @s = temp
-	endfunction "}}}
-endif
-
-if dein#tap('vim-denite-z')
-	command! -nargs=+ -complete=file Z
-		\ call denite#start([{'name': 'z', 'args': [<q-args>], {'immediately': 1}}])
-endif
-
 if dein#tap('tagbar')
 	nnoremap <silent> <Leader>o   :<C-u>TagbarOpenAutoClose<CR>
 	" sort by sourcefile
@@ -89,12 +38,6 @@ if dein#tap('neosnippet.vim')
 	xmap <silent><C-s> <Plug>(neosnippet_register_oneshot_snippet)
 	smap <silent>L     <Plug>(neosnippet_jump_or_expand)
 	xmap <silent>L     <Plug>(neosnippet_expand_target)
-endif
-
-if dein#tap('emmet-vim')
-	autocmd MyAutoCmd FileType html,htmldjango,css,scss.css,sass,jsx,javascript,javascript.jsx
-		\ EmmetInstall
-		\ | imap <buffer> <C-j> <Plug>(emmet-expand-abbr)
 endif
 
 if dein#tap('vim-operator-surround')
@@ -146,15 +89,6 @@ if dein#tap('vim-indent-guides')
 	nmap <silent><Leader>ti :<C-u>IndentGuidesToggle<CR>
 endif
 
-if dein#tap('vim-bookmarks')
-	nmap ma :<C-u>cgetexpr bm#location_list()<CR>
-		\ :<C-u>Denite quickfix -buffer-name=list<CR>
-	nmap mn <Plug>BookmarkNext
-	nmap mp <Plug>BookmarkPrev
-	nmap mm <Plug>BookmarkToggle
-	nmap mi <Plug>BookmarkAnnotate
-endif
-
 if dein#tap('committia.vim')
 	let g:committia_hooks = {}
 	function! g:committia_hooks.edit_open(info)
@@ -172,19 +106,11 @@ if dein#tap('python_match.vim')
 	nmap <buffer> }} ]%
 endif
 
-if dein#tap('goyo.vim')
-	nnoremap <Leader>G :Goyo<CR>
-endif
-
 if dein#tap('vim-peekaboo')
 	nnoremap <buffer> <silent> " :<c-u>call peekaboo#peek(v:count1, 'quote',  0)<cr>
 	xnoremap <buffer> <silent> " :<c-u>call peekaboo#peek(v:count1, 'quote',  1)<cr>
 	nnoremap <buffer> <silent> @ :<c-u>call peekaboo#peek(v:count1, 'replay', 0)<cr>
 	inoremap <buffer> <silent> <c-r> <c-o>:call peekaboo#peek(1, 'ctrl-r',  0)<cr>
-endif
-
-if dein#tap('vimwiki')
-	nnoremap <silent> <Leader>W :<C-u>VimwikiIndex<CR>
 endif
 
 if dein#tap('vim-choosewin')
@@ -201,55 +127,12 @@ if dein#tap('jedi-vim')
 	let g:jedi#usages_command = '<Leader>n'
 endif
 
-if dein#tap('tern_for_vim')
-	autocmd MyAutoCmd FileType javascript,jsx,javascript.jsx
-		\  nnoremap <silent><buffer> K          :<C-u>TernDoc<CR>
-		\| nnoremap <silent><buffer> <C-]>      :<C-u>TernDef<CR>
-		\| nnoremap <silent><buffer> <leader>g  :<C-u>TernType<CR>
-		\| nnoremap <silent><buffer> <leader>n  :<C-u>TernRefs<CR>
-		\| nnoremap <silent><buffer> <leader>r  :<C-u>TernRename<CR>
-endif
-
 if dein#tap('vim-gitgutter')
 	nmap <Leader>hj <Plug>GitGutterNextHunk
 	nmap <Leader>hk <Plug>GitGutterPrevHunk
 	nmap <Leader>hs <Plug>GitGutterStageHunk
 	nmap <Leader>hr <Plug>GitGutterUndoHunk
 	nmap <Leader>hp <Plug>GitGutterPreviewHunk
-endif
-
-if dein#tap('vim-go')
-	" for golang https://github.com/fatih/vim-go https://github.com/fatih/vim-go-tutorial
-	let g:go_fmt_command = "goimports"
-	set autowrite
-	autocmd FileType go nmap <C-b> <Plug>(go-build)
-	autocmd FileType go nmap <C-e> <Plug>(go-run)
-	autocmd FileType go nmap <C-i> <Plug>(go-imports)
-	" let g:go_list_type = "quickfix"
-	let g:go_auto_type_info = 1
-	autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-	let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-	let g:go_metalinter_autosave_enabled = ['golint']
-	let g:go_metalinter_autosave = 1
-
-	autocmd MyAutoCmd FileType go
-		\   nmap <C-]> <Plug>(go-def)
-		\ | nmap <Leader>god  <Plug>(go-describe)
-		\ | nmap <Leader>goc  <Plug>(go-callees)
-		\ | nmap <Leader>goC  <Plug>(go-callers)
-		\ | nmap <Leader>goi  <Plug>(go-info)
-		\ | nmap <Leader>gom  <Plug>(go-implements)
-		\ | nmap <Leader>gos  <Plug>(go-callstack)
-		\ | nmap <Leader>goe  <Plug>(go-referrers)
-		\ | nmap <Leader>gor  <Plug>(go-run)
-		\ | nmap <Leader>gov  <Plug>(go-vet)
-endif
-
-if dein#tap('phpcomplete-extended')
-	autocmd MyAutoCmd FileType php
-		\   nmap <silent> <unique> K <Plug>(phpcomplete-extended-doc)
-		\ | nmap <silent> <unique> <C-]> <Plug>(phpcomplete-extended-goto)
-		\ | nmap <silent> <unique> <Leader>a <Plug>(phpcomplete-extended-add-use)
 endif
 
 if dein#tap('vimagit')
@@ -271,10 +154,6 @@ endif
 
 if dein#tap('undotree')
 	nnoremap <Leader>gu :UndotreeToggle<CR>
-endif
-
-if dein#tap('vim-online-thesaurus')
-	nnoremap <silent> <Leader>K :<C-u>OnlineThesaurusCurrentWord<CR>
 endif
 
 if dein#tap('vim-asterisk')
@@ -469,11 +348,6 @@ if dein#tap('ctrlp.vim')
 	endif
 endif
 
-if dein#tap('scss-syntax.vim')
-	"http://vimawesome.com/plugin/scss-syntax-vim
-	au BufRead,BufNewFile *.scss set filetype=scss.css
-endif
-
 if dein#tap('rainbow_parentheses.vim')
 	"http://vimawesome.com/plugin/rainbow-parentheses-vim   花里胡哨的彩虹括号^_^
 	"http://www.wklken.me/posts/2015/06/07/vim-plugin-rainbowparentheses.html
@@ -517,13 +391,6 @@ if dein#tap('vim-startify')
 	let g:startify_change_to_dir = 0
 endif
 
-if dein#tap('vim-youdao-translater')
-	" https://github.com/ianva/vim-youdao-translater settings
-	vnoremap <silent> <C-Y> :<C-u>Ydv<CR>
-	nnoremap <silent> <C-Y> :<C-u>Ydc<CR>
-	noremap <leader>yd :<C-u>Yde<CR>
-endif
-
 if dein#tap('toggle-numbers.vim')
 	" Plugin 'fullybaked/toggle-numbers.vim'
 	nmap ,n :LineNumberToggle<cr>
@@ -533,18 +400,18 @@ endif
 
 if dein#tap('vim-airline')
 	" for airline
-	let g:airline_powerline_fonts=1
-	let g:airline_theme = 'wombat'
+	let g:airline_powerline_fonts=0
+	let g:airline_theme = 'hybrid'
 	let g:airline#extensions#tabline#enabled = 1
 	function! ArilineInit()
-			let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
-			let g:airline_section_b = airline#section#create_left(['ffenc', 'hunks', '%F'])
-			"let g:airline_section_c = airline#section#create(['filetype'])
-			let g:airline_section_x = airline#section#create(['%P'])
-			let g:airline_section_y = airline#section#create(['%B'])
-			let g:airline_section_z = airline#section#create_right(['%l', '%c'])
+		let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
+		let g:airline_section_b = airline#section#create_left(['ffenc', 'hunks', '%F'])
+	  "let g:airline_section_c = airline#section#create(['filetype'])
+		let g:airline_section_x = airline#section#create(['%P'])
+		let g:airline_section_y = airline#section#create(['%B'])
+		let g:airline_section_z = airline#section#create_right(['%l', '%c'])
 	endfunction
-	autocmd VimEnter * call ArilineInit()
+	"autocmd VimEnter * call ArilineInit()
 endif
 
 

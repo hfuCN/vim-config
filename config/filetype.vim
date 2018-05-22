@@ -48,37 +48,19 @@ augroup MyAutoCmd " {{{
 
 	autocmd TabLeave * let g:lasttab = tabpagenr()
 
-	autocmd FileType crontab setlocal nobackup nowritebackup
-
-	autocmd FileType css setlocal equalprg=csstidy\ -\ --silent=true
-
 	autocmd FileType docker-compose setlocal expandtab
 
 	autocmd FileType gitcommit setlocal spell
 
 	autocmd FileType gitcommit,qfreplace setlocal nofoldenable
 
-	" https://webpack.github.io/docs/webpack-dev-server.html#working-with-editors-ides-supporting-safe-write
-	autocmd FileType html,css,javascript,jsx,javascript.jsx setlocal backupcopy=yes
-
 	autocmd FileType zsh setlocal foldenable foldmethod=marker
-
-	autocmd FileType html
-		\ setlocal path+=./;/
-		\ | setlocal equalprg=tidy\ -i\ -q
 
 	autocmd FileType json setlocal equalprg=python\ -c\ json.tool
 
 	autocmd FileType markdown
 		\ set expandtab
 		\ | setlocal autoindent formatoptions=tcroqn2 comments=n:>
-
-	autocmd FileType apache setlocal path+=./;/
-
-	autocmd FileType cam setlocal nonumber synmaxcol=10000
-
-	autocmd FileType go highlight default link goErr WarningMsg |
-		\ match goErr /\<err\>/
 
 	autocmd FileType xml
 		\ setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
@@ -87,11 +69,6 @@ augroup END " }}}
 
 " Internal Plugin Settings  {{{
 " ------------------------
-
-" PHP {{{
-let g:PHP_removeCRwhenUnix = 0
-
-" }}}
 " Python {{{
 let g:python_highlight_all = 1
 
@@ -103,20 +80,6 @@ let g:vim_indent_cont = &shiftwidth
 " }}}
 " Bash {{{
 let g:is_bash = 1
-
-" }}}
-" Java {{{
-let g:java_highlight_functions = 'style'
-let g:java_highlight_all = 1
-let g:java_highlight_debug = 1
-let g:java_allow_cpp_keywords = 1
-let g:java_space_errors = 1
-let g:java_highlight_functions = 1
-
-" }}}
-" JavaScript {{{
-let g:SimpleJsIndenter_BriefMode = 1
-let g:SimpleJsIndenter_CaseIndentLevel = -1
 
 " }}}
 " Markdown {{{
@@ -140,8 +103,6 @@ let g:markdown_fenced_languages = [
 let g:vimsyn_folding = 'af'
 let g:tex_fold_enabled = 1
 let g:xml_syntax_folding = 1
-let g:php_folding = 2
-let g:php_phpdoc_folding = 1
 let g:perl_fold = 1
 " }}}
 " }}}
