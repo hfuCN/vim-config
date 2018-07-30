@@ -5,11 +5,11 @@ venv="${XDG_CACHE_HOME:-$HOME/.cache}/vim/venv"
 
 # Try to detect python2/3 executables
 if ! hash python2 2>/dev/null; then
-	echo "Python2 installation not found."
-	exit 1
+  echo "Python2 installation not found."
+  exit 1
 elif ! hash python3 2>/dev/null; then
-	echo "Python3 installation not found."
-	exit 1
+  echo "Python3 installation not found."
+  exit 1
 fi
 
 # Ensure python 2/3 virtual environments

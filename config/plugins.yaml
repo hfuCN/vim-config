@@ -39,6 +39,7 @@
 - repo: vim-airline/vim-airline-themes
 - repo: Yggdroot/indentLine
 - repo: sheerun/vim-polyglot
+- repo: trevordmiller/nova-vim
 - repo: tpope/vim-surround
 - repo: junegunn/vim-easy-align
 # - repo: editorconfig/editorconfig-vim
@@ -300,22 +301,22 @@
   on_path: COMMIT_EDITMSG
   hook_source: let g:committia_min_window_width = 70
 
-- repo: neomake/neomake
-  if: has('nvim') && empty($VIM_MINIMAL)
-  on_cmd: Neomake
-  hook_source: source $VIMPATH/config/plugins/neomake.vim
-  hook_add: |
-    let g:lint_filetypes = [
-      \  'ansible', 'php', 'ruby', 'vim', 'go', 'sh',
-      \  'javascript', 'jsx', 'javascript.jsx', 'json', 'css',
-      \  'markdown', 'html', 'yaml'
-      \ ]
-    autocmd MyAutoCmd BufWritePost *
-      \ if index(g:lint_filetypes, &filetype) > -1 && empty(&buftype)
-      \|   Neomake
-      \| elseif &filetype =~ 'html'
-      \|   Neomake tidy
-      \| endif
+#- repo: neomake/neomake
+#  if: has('nvim') && empty($VIM_MINIMAL)
+#  on_cmd: Neomake
+#  hook_source: source $VIMPATH/config/plugins/neomake.vim
+#  hook_add: |
+#    let g:lint_filetypes = [
+#      \  'ansible', 'php', 'ruby', 'vim', 'go', 'sh',
+#      \  'javascript', 'jsx', 'javascript.jsx', 'json', 'css',
+#      \  'markdown', 'html', 'yaml'
+#      \ ]
+#    autocmd MyAutoCmd BufWritePost *
+#      \ if index(g:lint_filetypes, &filetype) > -1 && empty(&buftype)
+#      \|   Neomake
+#      \| elseif &filetype =~ 'html'
+#      \|   Neomake tidy
+#      \| endif
 
 #- repo: junegunn/goyo.vim
 #  if: empty($VIM_MINIMAL)
